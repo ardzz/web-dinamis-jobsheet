@@ -1,24 +1,21 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 <?php
-    $object1 = new User();
-    $object1->name = "Alisa";
-    $object2 = $object1;
-    $object2->name = "Amira";
-    echo "Object1 name = " . $object1->name."<br>";
-    echo "Object2 name = " . $object2->name."<br>";
-
-    class User{
-        public $name;
+    class laptop{
+        var $pemilik;
+        function hidupkan_laptop(){
+            return "hidupkan_laptop";
+        }
     }
-?>
-</body>
-</html>
+    $laptop_anto = new laptop();
+    $laptop_andi = new laptop();
+    $laptop_dina = new laptop();
+
+    $laptop_anto->pemilik="Diana";
+    $laptop_andi->pemilik="Mona";
+    $laptop_dina->pemilik="Donna";
+
+    echo $laptop_anto->pemilik;
+    echo "<br />";
+    echo $laptop_andi->pemilik;
+    echo "<br />";
+    echo $laptop_dina->pemilik;
+    echo "<br />";
