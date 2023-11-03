@@ -13,9 +13,9 @@
     const umur = 20;
     const status_menikah = false;
     const alamat = "Jl. Merpati no 123";
-    const string = "Halo " + nama + ", umur saya " + umur + " tahun, alamat saya di " + alamat + ", dan saya status menikah " + status_menikah + ".";
+    const string = "Halo " + nama + ", umur saya " + umur + " tahun, alamat saya di " + alamat + ", dan saya status menikah " + status_menikah;
 
-        document.writeln(string);
+    document.writeln(string);
 </script>
 </body>
 </html>
