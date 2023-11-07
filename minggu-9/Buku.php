@@ -60,7 +60,7 @@ class Buku extends database
     function tampil_data_buku(){
         $query =
             <<<QUERY
-SELECT a.*, b.*, c.*, d.*, e.* FROM data_buku a
+SELECT a.*, b.*, c.*, d.* FROM data_buku a
 INNER JOIN data_pengarang b ON b.kode_pengarang = a.kode_pengarang
 INNER JOIN data_jenis_buku c ON c.kode_jenis_buku = a.kode_jenis_buku
 INNER JOIN data_penerbit d ON d.kode_penerbit = a.kode_penerbit
@@ -73,7 +73,7 @@ QUERY;
     {
     $query =
             <<<QUERY
-SELECT a.*, b.*, c.* FROM data_peminjaman a
+SELECT a.*, b.*, c.* FROM peminjaman a
 INNER JOIN data_buku b ON b.kode_buku = a.kode_buku
 INNER JOIN data_peminjam c ON c.kode_peminjam = a.kode_peminjam
 QUERY;
