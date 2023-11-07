@@ -14,14 +14,14 @@
             );
         }
 
-        public function getConnection(): mysqli
+        static function getConnection(): mysqli
         {
             return self::$connection;
         }
 
-        public static function connect(): self
+        public static function connect()
         {
-            return new self();
+            new self();
         }
 
         protected function asocToArray(mysqli_result $data): array
@@ -33,4 +33,3 @@
             return $result;
         }
     }
-?>

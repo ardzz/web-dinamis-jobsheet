@@ -2,10 +2,13 @@
 include "3_config.php";
 class DataPeminjam extends database
 {
+    static function getInstace(): DataPeminjam
+    {
+        return new self();
+    }
     function show_data_peminjam(): array
     {
-        $data = $this
-            ->getConnection()
+        $data = self::getConnection()
             ->query("SELECT * FROM data_peminjam");
         return $this->asocToArray($data);
     }
@@ -14,16 +17,14 @@ class DataPeminjam extends database
     {
         // kelamin = p (data_peminjam)
         // p = perempuan (jenis_kelamin)
-        $data = $this
-            ->getConnection()
+        $data = self::getConnection()
             ->query("SELECT a.*, b.* FROM data_peminjam a INNER JOIN jenis_kelamin b ON b.kode_jk = a.jenis_kelamin;");
         return $this->asocToArray($data);
     }
 
     function show_data_jenis_kelamin(): array
     {
-        $data = $this
-            ->getConnection()
+        $data = self::getConnection()
             ->query("SELECT * FROM jenis_kelamin");
         return $this->asocToArray($data);
     }
@@ -37,8 +38,7 @@ class DataPeminjam extends database
         string $pekerjaan,
         string $user_id,
         string $foto): bool {
-        $data = $this
-            ->getConnection()
+        $data = self::getConnection()
             ->query("INSERT INTO data_peminjam (kode_peminjam, nama_peminjam, jenis_kelamin, tanggal_lahir, alamat, pekerjaan, user_id, foto) VALUES ('$kode_peminjam', '$nama_peminjam', '$jenis_kelamin', '$tanggal_lahir', '$alamat', '$pekerjaan', '$user_id', '$foto')");
         return $data;
     }
@@ -52,15 +52,13 @@ class DataPeminjam extends database
         string $pekerjaan,
         string $user_id,
         string $foto): bool {
-        return $this
-            ->getConnection()
+        return self::getConnection()
             ->query("UPDATE data_peminjam SET nama_peminjam='$nama_peminjam', jenis_kelamin='$jenis_kelamin', tanggal_lahir='$tanggal_lahir', alamat='$alamat', pekerjaan='$pekerjaan', user_id='$user_id', foto='$foto' WHERE kode_peminjam='$kode_peminjam'");
     }
 
     function show_kode_peminjam(string $kode): array
     {
-        $data = $this
-            ->getConnection()
+        $data = self::getConnection()
             ->query("SELECT a.*, b.* FROM data_peminjam a INNER JOIN jenis_kelamin b ON b.kode_jk = a.jenis_kelamin WHERE kode_peminjam='$kode'");
         return $this->asocToArray($data);
     }
