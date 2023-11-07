@@ -1,9 +1,10 @@
 <?php
+include "Model.php";
     class database{
-        var string $host = "localhost";
-        var string $username = "root";
-        var string $password = "";
-        var string $database = "sewa_buku";
+        protected string $host = "localhost";
+        protected string $username = "root";
+        protected string $password = "";
+        protected string $database = "sewa_buku";
         static mysqli $connection;
         function __construct(){
             self::$connection = new \mysqli(
@@ -22,6 +23,12 @@
         public static function connect()
         {
             new self();
+        }
+
+        static function executeQuery(string $query): mysqli_result|bool
+        {
+            return self::getConnection()
+                ->query($query);
         }
 
         protected function asocToArray(mysqli_result $data): array
