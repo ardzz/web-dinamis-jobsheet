@@ -1,21 +1,42 @@
 <?php
+include "Model.php";
     class database{
-        var $host = "localhost";
-        var $username = "root";
-        var $password = "";
-        var $database = "sewa_buku";
-        var $koneksi = "";
+        protected string $host = "localhost";
+        protected string $username = "root";
+        protected string $password = "";
+        protected string $database = "sewa_buku";
+        static mysqli $connection;
         function __construct(){
-            $this->koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database, $this->database);
-            if(mysqli_connect_errno()) echo "Koneksi database gagal : ". mysqli_connect_error();
+            self::$connection = new \mysqli(
+                $this->host,
+                $this->username,
+                $this->password,
+                $this->database
+            );
         }
-        function tampil_data(){
-            $data = mysqli_query($this->koneksi, "select * from data_peminjam");
-            $hasil = [];
-            while($row = mysqli_fetch_array($data)){
-                $hasil[] = $row;
+
+        static function getConnection(): mysqli
+        {
+            return self::$connection;
+        }
+
+        public static function connect()
+        {
+            new self();
+        }
+
+        static function executeQuery(string $query): mysqli_result|bool
+        {
+            return self::getConnection()
+                ->query($query);
+        }
+
+        protected function asocToArray(mysqli_result $data): array
+        {
+            $result = [];
+            while ($row = $data->fetch_assoc()){
+                $result[] = $row;
             }
-            return $hasil;
+            return $result;
         }
     }
-?>
