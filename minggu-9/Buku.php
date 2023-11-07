@@ -68,4 +68,16 @@ QUERY;
         $data = self::executeQuery($query);
         return $this->asocToArray($data);
     }
+
+    function tampil_peminjaman()
+    {
+    $query =
+            <<<QUERY
+SELECT a.*, b.*, c.* FROM data_peminjaman a
+INNER JOIN data_buku b ON b.kode_buku = a.kode_buku
+INNER JOIN data_peminjam c ON c.kode_peminjam = a.kode_peminjam
+QUERY;
+        $data = self::executeQuery($query);
+        return $this->asocToArray($data);
+    }
 }
