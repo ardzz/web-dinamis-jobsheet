@@ -16,7 +16,7 @@
     array.push("Jl. Merpati no 123");
     array.push("Halo " + array[0] + ", umur saya " + array[1] + " tahun, alamat saya di " + array[3] + ", dan saya status menikah " + array[2] + ".");
     document.writeln(array[4]);
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length-1; i++) {
         document.writeln(array[i]);
     }
 </script>
