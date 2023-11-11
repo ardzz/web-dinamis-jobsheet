@@ -9,11 +9,11 @@
 </head>
 <body>
 <?php
-    include '3_config.php';
-    $db = new Database();
+    include 'DataPeminjam.php';
+    DataPeminjam::connect();
 ?>
 <h3>Tambah Data Peminjam</h3>
-<form action "7_2_simpan_data_peminjam.php" method="post">
+<form action="7_2_simpan_data_peminjam.php" method="post">
 <table>
     <tr>
         <td>Kode Peminjam</td>
@@ -30,7 +30,7 @@
                 <option value ="--"></option>
                 <?php
                 $no = 1;
-                foreach($db->tampil_data_jenis_kelamin() as $x){
+                foreach(DataPeminjam::getInstace()->show_data_jenis_kelamin() as $x){
                     echo '<option value = "'.$x['kode_jk'].'">'.$x['keterangan_jk'].'</option>';
                 }
                 ?>

@@ -1,11 +1,7 @@
 <?php
     include ('4_tampilkan_data_peminjam.php');
-    $db = new database();
     if (isset($_GET['id'])){
         $kode_peminjam = $_GET['id'];
-        $db->hapus_data_peminjam($kode_peminjam);
-        header('location:4_tampilkan_data_peminjam.php');
+        DataPeminjam::getInstace()->delete_data_peminjam($kode_peminjam);
     }
-    else{
-        header('location:4_tampilkan_data_peminjam.php');
-    }
+    header('location:4_tampilkan_data_peminjam.php');

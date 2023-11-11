@@ -8,8 +8,8 @@
 </head>
 <body>
 <?php
-include 'config.php';
-$db = new Database();
+include 'Buku.php';
+Buku::connect();
 ?>
 <h3>Peminjaman Buku</h3>
 <form action="15_2_simpan_peminjaman.php" method="post">
@@ -20,7 +20,7 @@ $db = new Database();
                 <select name="kode_buku"> <option value="--"></option>
                     <?php
                     $no = 1;
-                    foreach($db->ambil_data_buku() as $x) {
+                    foreach(Buku::getInstace()->show_data_buku() as $x) {
                         echo '<option value="' . $x['kode_buku'] . '">' . $x['judul_buku'] . '</option>';
                     }
                     ?>
@@ -33,7 +33,7 @@ $db = new Database();
                 <select name="kode_peminjam"> <option value="--"></option>
                     <?php
                     $no = 1;
-                    foreach($db->ambil_data_peminjam() as $x) {
+                    foreach(Buku::getInstace()->show_data_peminjam() as $x) {
                         echo '<option value="' . $x['kode_peminjam'] . '">' . $x['nama_peminjam'] . '</option>';
                     }
                     ?>

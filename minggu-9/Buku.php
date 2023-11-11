@@ -57,7 +57,8 @@ class Buku extends database
         return self::executeQuery("INSERT INTO data_buku (kode_buku, judul_buku, kode_pengarang, kode_jenis_buku, kode_penerbit, isbn, tahun, deskripsi, jumlah) VALUES ('$kode_buku', '$judul_buku', '$kode_pengarang', '$kode_jenis', '$kode_penerbit', '$isbn', '$tahun', '$deskripsi', '$jumlah')");
     }
 
-    function tampil_data_buku(){
+    function tampil_data_buku(): array
+    {
         $query =
             <<<QUERY
 SELECT a.*, b.*, c.*, d.* FROM data_buku a
@@ -69,7 +70,7 @@ QUERY;
         return $this->asocToArray($data);
     }
 
-    function tampil_peminjaman()
+    function tampil_peminjaman(): array
     {
     $query =
             <<<QUERY
@@ -79,5 +80,48 @@ INNER JOIN data_peminjam c ON c.kode_peminjam = a.kode_peminjam
 QUERY;
         $data = self::executeQuery($query);
         return $this->asocToArray($data);
+    }
+
+    public function tambah_data_pengarang(mixed $kode_pengarang, mixed $nama_pengarang): mysqli_result|bool
+    {
+        return self::executeQuery("INSERT INTO data_pengarang (kode_pengarang, nama_pengarang) VALUES ('$kode_pengarang', '$nama_pengarang')");
+    }
+
+    public function show_data_pengarang(): array
+    {
+        $data = self::executeQuery("SELECT * FROM data_pengarang");
+        return $this->asocToArray($data);
+    }
+
+    public function show_data_jenis_buku()
+    {
+        $data = self::executeQuery("SELECT * FROM data_jenis_buku");
+        return $this->asocToArray($data);
+    }
+
+    public function show_data_penerbit()
+    {
+        $data = self::executeQuery("SELECT * FROM data_penerbit");
+        return $this->asocToArray($data);
+    }
+
+    public function show_data_buku()
+    {
+        $data = self::executeQuery("SELECT * FROM data_buku");
+        return $this->asocToArray($data);
+    }
+
+    public function show_data_peminjam()
+    {
+        $data = self::executeQuery("SELECT * FROM data_peminjam");
+        return $this->asocToArray($data);
+    }
+
+    public function tambah_peminjaman(mixed $kode_buku, mixed $kode_peminjam)
+    {
+        $tanggal_pinjam = date('Y-m-d');
+        $tanggal_kembali = date('Y-m-d', strtotime('+7 days', strtotime($tanggal_pinjam)));
+        $status = 1;
+        return self::executeQuery("INSERT INTO peminjaman (kode_buku, kode_peminjam, tanggal_pinjam, tanggal_kembali, status) VALUES ('$kode_buku', '$kode_peminjam', '$tanggal_pinjam', '$tanggal_kembali', '$status')");
     }
 }

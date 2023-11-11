@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Document</title>
 </head>
 <body>
-<?php
-include 'config.php'; $db = new Database();
-?>
 <h3>Tambah Data Penerbit</h3>
 <form action="12_2_simpan_data_penerbit.php" method="post">
     <table> <tr>

@@ -6,7 +6,8 @@
 </head>
 <body>
 <?php
-include '3_config.php'; $db = new Database();
+include 'Buku.php';
+Buku::connect();
 ?>
 <table border="1">
     <tr>
@@ -20,25 +21,26 @@ include '3_config.php'; $db = new Database();
     </tr>
     <?php
     $no = 1;
-    foreach($db->tampil_peminjaman() as $x){
+    foreach(Buku::getInstace()->tampil_peminjaman() as $x){
         ?>
         <tr>
             <td><?php echo $no++; ?></td>
-            <td><?php echo $x['judul_buku']; ?></td> <td><?php echo $x['nama_peminjam']; ?></td>
+            <td><?php echo $x['kode_buku']; ?></td>
+            <td><?php echo $x['judul_buku']; ?></td>
+            <td><?php echo $x['nama_peminjam']; ?></td>
             <td><?php
                 $tanggal_pinjam = $x['tanggal_pinjam'];
                 $tanggal_pinjam1 = date("d F Y", strtotime($tanggal_pinjam));
                 echo $tanggal_pinjam1;
             ?>
             </td>
-            <td>
             <td><?php
                 $tanggal_kembali = $x['tanggal_kembali'];
                 $tanggal_kembali1 = date("d F Y", strtotime($tanggal_kembali));
                 echo $tanggal_kembali1;
                 ?>
                 </td>
-                <td><?php
+            <td><?php
                     $status_peminjaman = $x['status'];
                     if($status_peminjaman == '1'){
                         $tanggal_hari_ini = date('d F Y');
@@ -57,7 +59,7 @@ include '3_config.php'; $db = new Database();
                         echo "Sudah dikembalikan";
                     }
                     ?>
-                </td>
+            </td>
         </tr>
     <?php
     }

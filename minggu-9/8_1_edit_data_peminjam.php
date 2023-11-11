@@ -9,18 +9,18 @@
 </head>
 <body>
 <?php
-    include '3_config.php';
-    $db = new database();
+    include 'DataPeminjam.php';
+    DataPeminjam::connect();
     if (isset($_GET['id'])){
         $kode_peminjam = $_GET['id'];
-        $data_peminjam = $db->kode_peminjam($kode_peminjam);
+        $data_peminjam = DataPeminjam::getInstace()->show_kode_peminjam($kode_peminjam);
     }else{
         echo "aaaa";
         header('Location: 4_tampilkan_data_peminjam.php');
     }
 ?>
 <h3>Edit Data Peminjam</h3>
-<form action="8_2_simpan_edit_data_peminjam.php" method="POST">
+<form action="8_2_simpan_edit_data_pinjam.php" method="POST">
     <input type="hidden" name="kode_peminjam" value="<?php echo $data_peminjam[0]['kode_peminjam']; ?>"/>
     <table>
         <tr>
@@ -39,8 +39,8 @@
                     <?php
                         $no = 1;
                         $kode_jenis_kelamin = $data_peminjam[0]['jenis_kelamin'];
-                        foreach ($db->tampil_data_jenis_kelamin() as $x){
-                            echo "<option value".$x['kode_jk'];
+                        foreach (DataPeminjam::getInstace()->show_data_jenis_kelamin() as $x){
+                            echo "<option value='".$x['keterangan_jk']."'";
                             if($x['kode_jk'] == $kode_jenis_kelamin){echo " selected=selected";}
                             echo "> ".$x['keterangan_jk']."</option>";
                         }
@@ -58,7 +58,7 @@
         </tr>
         <tr>
             <td>Pekerjaan</td>
-            <td><input type="date" name="pekerjaan" value ="<?php echo $data_peminjam[0]['pekerjaan']; ?>"></td>
+            <td><input name="pekerjaan" value ="<?php echo $data_peminjam[0]['pekerjaan']; ?>"></td>
         </tr>
         <tr>
             <td></td>

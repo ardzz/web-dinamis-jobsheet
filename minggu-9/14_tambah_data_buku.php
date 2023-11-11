@@ -8,8 +8,8 @@
 </head>
 <body>
 <?php
-include 'config.php';
-$db = new Database();
+include 'Buku.php';
+Buku::connect();
 ?>
 <h3>Tambah Data Buku</h3>
 <form action="simpan_data_buku.php" method="post">
@@ -28,7 +28,7 @@ $db = new Database();
                 <select name="kode_pengarang"> <option value="--"></option>
                 <?php
                 $no = 1;
-                foreach($db->ambil_data_pengarang() as $x) {
+                foreach(Buku::getInstace()->show_data_pengarang() as $x) {
                     echo '<option value="' . $x['kode_pengarang'] . '">' . $x['nama_pengarang'] . '</option>';
                 }
                 ?>
@@ -41,7 +41,7 @@ $db = new Database();
                 <select name="kode_jenis_buku"> <option value="--"></option>
                     <?php
                     $no = 1;
-                    foreach ($db->ambil_data_jenis_buku() as $x) {
+                    foreach (Buku::getInstace()->show_data_jenis_buku() as $x) {
                         echo '<option value="'.$x['kode_jenis_buku'].'">'.$x['nama_jenis_buku'].'</option>';
                         }
                     ?>
@@ -55,7 +55,7 @@ $db = new Database();
                     <option value="--"></option>
                     <?php
                     $no = 1;
-                    foreach ($db->ambil_data_penerbit() as $x) {
+                    foreach (Buku::getInstace()->show_data_penerbit() as $x) {
                         echo '<option value="' . $x['kode_penerbit'] . '">' . $x['nama_penerbit'] . '</option>';
                     }
                     ?>
@@ -71,10 +71,11 @@ $db = new Database();
             <td>
                 <select id="year" name="tahun">
                     <script>
+
                         var myDate = new Date();
                         var year = myDate.getFullYear();
-                        for (var i = 2010; i < year+6; i++){
-                            document.write('<option value="'+i+'">'+i+'</option>");
+                        for(var i = 2016; i < year+1; i++){
+                            document.write('<option value="'+i+'">'+i+'</option>');
                         }
                     </script>
                 </select>

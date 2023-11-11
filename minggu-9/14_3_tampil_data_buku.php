@@ -6,7 +6,8 @@
 </head>
 <body>
 <?php
-include '3_config.php'; $db = new Database();
+include 'Buku.php';
+Buku::connect();
 ?>
 <table border="1">
     <tr>
@@ -23,7 +24,7 @@ include '3_config.php'; $db = new Database();
     </tr>
     <?php
     $no = 1;
-    foreach($db->tampil_data_penerbit() as $x){
+    foreach(Buku::getInstace()->tampil_data_buku() as $x){
         ?>
         <tr>
             <td><?php echo $no++; ?></td>

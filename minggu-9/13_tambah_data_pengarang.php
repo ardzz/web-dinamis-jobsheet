@@ -9,8 +9,7 @@
 </head>
 <body>
 <?php
-include '3_config.php';
-$db = new database();
+include 'Buku.php';
 ?>
 <h3>Tambaha Data Jenis Buku</h3>
 <form action="13_2_simpan_data_pengarang.php" method="post">

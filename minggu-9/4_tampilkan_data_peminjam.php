@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php
-    include '3_config.php';
-    $db = new Database();
+    include 'DataPeminjam.php';
+    DataPeminjam::connect();
 ?>
 <table>
     <tr>
@@ -22,10 +22,11 @@
         <th>Alamat</th>
         <th>Pekerjaan</th>
         <th>Edit</th>
+        <th>Hapus</th>
     </tr>
     <?php
         $no = 1;
-        foreach ($db->tampil_data() as $x){
+        foreach (DataPeminjam::getInstace()->show_data_peminjam_with_join() as $x){
     ?>
     <tr>
         <td><?php echo $no++; ?></td>
@@ -40,6 +41,7 @@
         <td><?php echo $x['alamat']; ?></td>
         <td><?php echo $x['pekerjaan']; ?></td>
         <td><a href="8_1_edit_data_peminjam.php?id=<?php echo $x['kode_peminjam']; ?>">Edit</a></td>
+        <td><a href="9_hapus_data_peminjam.php?id=<?php echo $x['kode_peminjam']; ?>">Hapus</a></td>
     </tr>
     <?php
         }
